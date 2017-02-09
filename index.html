@@ -18,7 +18,6 @@
 <script id='fss_script' type='x-shader/x-fragment'>
 
 ---------------------------------------------------------------------
-
 varying vec3 vPos;                               // Position in image
 uniform float uTime;                             // Time
 vec3 LD1 = normalize(vec3(1.,-sin(uTime),.5));  // Light direction
@@ -34,7 +33,8 @@ vec2 raytraceSphere(vec3 V, vec3 W, vec4 S) {
 }
 
 void main() {
-   vec3 c = vec3(.01,.01,.04);                   // Dark background
+   vec3 c = vec3(.5,1.,1.);                   // Dark background
+   c = mix(vec3(0.02,.0,0.1), c, .5+.5*vPos.y);
 
    vec3 V = vec3(0.,0.,0.);                      // Ray origin
    vec3 W = normalize(vec3(vPos.xy, -3.));       // Ray direction
