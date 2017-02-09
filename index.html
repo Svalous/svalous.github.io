@@ -49,7 +49,7 @@ void main() {
       float brightness2 = max(0., dot(N, LD2));  // Second light
       brightness2 += mix(.1, brightness2, .5);
       c = vec3(.1,1.,.1) * brightness;
-      c = vec3(1.,.1,1.) * brightness2;
+      c += vec3(1.,.1,1.) * brightness2;
    }
 
    gl_FragColor = vec4(sqrt(c), 1.);             // Final pixel color
