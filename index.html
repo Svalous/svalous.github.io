@@ -38,8 +38,8 @@ void main() {
 
    vec3 V = vec3(0.,0.,0.);                      // Ray origin
    vec3 W = normalize(vec3(vPos.xy, -3.));       // Ray direction
-   vec4 S1 = vec4(cos(uTime),sin(uTime),-5.,.5);  // Animate sphere
-   vec4 S2 = vec4(sin(uTime),sin(uTime),-5.,.5);
+   vec4 S1 = vec4(cos(uTime),sin(uTime),-5.+cos(uTime),.5);  // Animate sphere
+   vec4 S2 = vec4(sin(uTime),sin(uTime),-4.+(3.*sin(uTime)),.5);
 
    vec2 t = raytraceSphere(V, W, S1);             // Ray trace sphere
    vec2 u = raytraceSphere(V, W, S2);
