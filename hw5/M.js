@@ -8,7 +8,11 @@ var M = {stack: []};
 // Your task is to implement the following methods of object M:
 //////////////////////////////////////////////////////////////////////////////
 
-M.identity  = function(m)          {m = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];}; // Set m values to identity matrix.
+M.identity  = function(m)          {
+	var id = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+	for( var i = 0; i < 16; i++ )
+		m[i] = id[i];
+}; // Set m values to identity matrix.
 
 M.restore   = function(m)          {
 	var tmp = M.stack.pop();
