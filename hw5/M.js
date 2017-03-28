@@ -14,7 +14,7 @@ M.identity  = function(m)          {m = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];}; 
 M.restore   = function(m)          {
 	var tmp = save.pop();
 	for( var i = 0; i < 16; i++ )
-		m[i] = tmp();
+		m[i] = tmp[i];
 }; // Pop from a stack to set the 16 values of m.
 
 M.rotateX   = function(m, radians) {
