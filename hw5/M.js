@@ -9,15 +9,39 @@ var M = {};
 // Your task is to implement the following methods of object M:
 //////////////////////////////////////////////////////////////////////////////
 
-M.identity  = function(m)          {           } // Set m values to identity matrix.
-M.restore   = function(m)          {           } // Pop from a stack to set the 16 values of m.
-M.rotateX   = function(m, radians) {           } // Modify m, rotating about the X axis.
-M.rotateY   = function(m, radians) {           } // Modify m, rotating about the Y axis.
-M.rotateZ   = function(m, radians) {           } // Modify m, rotating about the Z axis.
-M.save      = function(m)          {           } // Push the 16 values of m onto a stack.
-M.scale     = function(m, v)       {           } // Modify m, scaling by v[0],v[1],v[2].
-M.transform = function(m, v)       { return m; } // Return vec v transformed by matrix m.
-M.translate = function(m, v)       {           } // Modify m, translating by v[0],v[1],v[2].
+M.identity  = function(m)          {m = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];}; // Set m values to identity matrix.
+
+M.restore   = function(m)          {
+	for( var i = 0; i < 16; i++ )
+		m[i] = M.tmp[i];
+}; // Pop from a stack to set the 16 values of m.
+
+M.rotateX   = function(m, radians) {
+	var trs = [1,0,0,0, 0,Math.cos(radians),-Math.sin(radians),0, 0,Math.sin(radians),Math.cos(radians),0, 0,0,0,1];
+	M.matrixMultiply(m,trs,m);
+}; // Modify m, rotating about the X axis.
+
+M.rotateY   = function(m, radians) {
+	var trs = [Math.cos(radians),0,Math.sin(radians),0, 0,1,0,0, -Math.sin(radians),0,Math.cos(radians),0, 0,0,0,1];
+	M.matrixMultiply(m,trs,m);
+}; // Modify m, rotating about the Y axis.
+
+M.rotateZ   = function(m, radians) {
+	var trs = [Math.cos(radians),-Math.sin(radians),0,0, Math.sin(radians),Math.cos(radians),0,0, 0,0,1,0, 0,0,0,1];
+	M.matrixMultiply(m,trs,m);
+}; // Modify m, rotating about the Z axis.
+
+M.save      = function(m)          {
+	for( var i = 0; i < 16; i++ )
+		M.tmp.push(m[i]);
+}; // Push the 16 values of m onto a stack.
+
+M.scale     = function(m, v)       {
+	var trs = [v[0],0,0,0, 0,v[1],0,0, 0,0,v[2],0, 0,0,0,1];
+	M.matrixMultiply(m,trs,m);
+}; // Modify m, scaling by v[0],v[1],v[2].
+//M.transform = function(m, v)       { return m; } // Return vec v transformed by matrix m.
+//M.translate = function(m, v)       {           } // Modify m, translating by v[0],v[1],v[2].
 
 //////////////////////////////////////////////////////////////////////////////
 // I have given you a head start by implementing some of the methods for you.
@@ -27,11 +51,11 @@ M.translate = function(m, v)       {           } // Modify m, translating by v[0
 
 M.translate = function(m, v) {
    M.matrixMultiply(m, M.translationMatrix(v), m);
-}
+};
 
 M.translationMatrix = function(v) {
    return [ 1,0,0,0, 0,1,0,0, 0,0,1,0, v[0],v[1],v[2],1 ];
-}
+};
 
 M.matrixMultiply = function(a, b, dst) {
    var n, tmp = []; 
@@ -48,7 +72,7 @@ M.matrixMultiply = function(a, b, dst) {
 
    for (n = 0 ; n < 16 ; n++)
       dst[n] = tmp[n];
-}
+};
 
 M.transform = function(m, v)  {
 
@@ -62,5 +86,5 @@ M.transform = function(m, v)  {
              x * m[1] + y * m[5] + z * m[ 9] + w * m[13],
              x * m[2] + y * m[6] + z * m[10] + w * m[14],
              x * m[3] + y * m[7] + z * m[11] + w * m[15] ];
-}
+};
 
