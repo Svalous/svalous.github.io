@@ -2,8 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////
 // M is an object containing methods that let you manipulate 4x4 matrices.
 //////////////////////////////////////////////////////////////////////////////
-var save = [];
-var M = {};
+var M = {stack: []};
 
 //////////////////////////////////////////////////////////////////////////////
 // Your task is to implement the following methods of object M:
@@ -12,8 +11,9 @@ var M = {};
 M.identity  = function(m)          {m = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];}; // Set m values to identity matrix.
 
 M.restore   = function(m)          {
+	var tmp = M.stack.pop();
 	for( var i = 0; i < 16; i++ )
-		m[i] = save.pop();
+		m[i] = tmp.pop();
 }; // Pop from a stack to set the 16 values of m.
 
 M.rotateX   = function(m, radians) {
@@ -32,8 +32,10 @@ M.rotateZ   = function(m, radians) {
 }; // Modify m, rotating about the Z axis.
 
 M.save      = function(m)          {
+	tmp = [];
 	for( var i = 0; i < 16; i++ )
-		save.push(m[i]);
+		tmp.push(m[i]);
+	M.stack.push(save);
 }; // Push the 16 values of m onto a stack.
 
 M.scale     = function(m, v)       {
