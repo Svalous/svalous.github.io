@@ -39,7 +39,14 @@ M.save      = function(m)          {
 }; // Push the 16 values of m onto a stack.
 
 M.scale     = function(m, v)       {
-	var trs = [v[0],0,0,0, 0,v[1],0,0, 0,0,v[2],0, 0,0,0,1];
+	var x,y,z;
+	if(v instanceof Array) {
+		x = v[0];
+		y = v[1];
+		z = v[2];
+	} else
+		x = y = z = v;
+	var trs = [x,0,0,0, 0,y,0,0, 0,0,z,0, 0,0,0,1];
 	M.matrixMultiply(m,trs,m);
 }; // Modify m, scaling by v[0],v[1],v[2].
 //M.transform = function(m, v)       { return m; } // Return vec v transformed by matrix m.
