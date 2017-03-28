@@ -35,7 +35,7 @@ M.save      = function(m)          {
 	tmp = [];
 	for( var i = 0; i < 16; i++ )
 		tmp.push(m[i]);
-	M.stack.push(save);
+	M.stack.push(tmp);
 }; // Push the 16 values of m onto a stack.
 
 M.scale     = function(m, v)       {
