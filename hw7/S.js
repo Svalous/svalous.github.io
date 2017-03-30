@@ -38,12 +38,12 @@ S.sphere = function(u, v) {
 };
 
 S.doughnut = function(u, v) {
-	var theta = 2 * PI * u;
-	var phi = 2 * PI * v;
+	var theta = 2 * Math.PI * u;
+	var phi = 2 * Math.PI * v;
 	var r = 0.3;
 	return [
-	   cos(theta) * (1 + r * cos(phi)),
-	   sin(theta) * (1 + r * cos(phi)),
-	   r * sin(phi)
+	   Math.cos(theta) * (1 + r * Math.cos(phi)),
+	   Math.sin(theta) * (1 + r * Math.cos(phi)),
+	   r * Math.sin(phi)
 	];	
 };
