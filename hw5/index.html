@@ -1,26 +1,68 @@
 <table>
 
-<tr>
-<td><canvas id=canvas1 width=400 height=300></td>
-<td width=50></td>
-<td>
-Hi, I am a sleepy bird.
-</td>
-</tr>
+  <tr>
+    <td><canvas id=canvas1 width=400 height=300></td>
+      <td width=50></td>
+      <td>
+        Hi, I am a party.
+      </td>
+    </tr>
 
-<tr>
-<td><canvas id=canvas2 width=400 height=300></td>
-<td width=50></td>
-<td>
-Hi, I am a bird who has had its morning espresso.
-</td>
-</tr>
+    <tr>
+      <td><canvas id=canvas2 width=400 height=300></td>
+        <td width=50></td>
+        <td>
+          Hi, I HATE PARTIES.
+        </td>
+      </tr>
 
-</table>
+    </table>
 
-<script src=drawlib1.js></script>
-<script>
-   canvas1.update = function(g) {
+    <script src=drawlib1.js></script>
+    <script>
+      canvas1.update = function(g) {
+        for(var i = 0; i < time %5 + 2; i++) {
+          g.lineWidth = 1;
+          g.strokeStyle = 'blue';
+          g.beginPath();
+          g.moveTo(this.width*Math.random(), this.height*Math.random());
+          g.lineTo(0,0);
+          g.stroke();
+        }
+
+        for(var i = 0; i < time %5 + 2; i++) {
+          g.strokeStyle = 'green';
+          g.beginPath();
+          g.moveTo(this.width*Math.random(), this.height*Math.random());
+          g.lineTo(this.width,0);
+          g.stroke();
+        }
+
+        // dancey dude
+        g.lineWidth = 3;
+        g.strokeStyle = 'black';
+        g.beginPath();
+        // legs
+        g.moveTo((this.width/2)-10, this.height);
+        g.lineTo(this.width/2, this.height-15);
+        g.lineTo((this.width/2)+10, this.height);
+        // torso
+        g.moveTo(this.width/2, this.height-15);
+        g.lineTo(this.width/2, this.height-25);
+        // arms
+        var angle = Math.sin(time);
+        g.lineTo((this.width/2)-10-(10*Math.cos(angle)), (this.height-10)-(10*Math.sin(angle)));
+        g.moveTo(this.width/2, this.height-25);
+        g.lineTo((this.width/2)+10+(10*Math.sin(angle)), (this.height-10)-(10*Math.cos(angle)));
+        // head
+        g.moveTo(this.width/2, this.height-25);
+        g.lineTo((this.width/2)+5, this.height-25);
+        g.lineTo((this.width/2)+5, this.height-30);
+        g.lineTo((this.width/2)-5, this.height-30);
+        g.lineTo((this.width/2)-5, this.height-25);
+        g.lineTo(this.width/2, this.height-25);
+        g.stroke();
+          /*
       var blue = 128 + Math.floor(128 * Math.sin(10 * time));
       blue = 0;
 
@@ -54,9 +96,11 @@ Hi, I am a bird who has had its morning espresso.
       g.lineTo(x, y);
       g.lineTo(x+flapX, y-flapY);
       g.stroke();
-   }
+           */
+      }
 
-   canvas2.update = function(g) {
+canvas2.update = function(g) {
+  /*
       g.lineWidth = 5;
 
       g.beginPath();
@@ -92,9 +136,34 @@ Hi, I am a bird who has had its morning espresso.
       g.lineTo(x+flapX, y-flapY);
       g.lineTo(x+flapX+flapX2, y-flapY-flapY2);
       g.stroke();
+   */
+        // guy who hates dancing
+        g.lineWidth = 3;
+        g.strokeStyle = 'black';
+        g.beginPath();
+        // legs
+        g.moveTo((this.width/2)-10+(30*time), this.height);
+        g.lineTo((this.width/2)+(30*time), this.height-15);
+        g.lineTo((this.width/2)+10+(30*time), this.height);
+        // torso
+        g.moveTo((this.width/2)+(30*time), this.height-15);
+        g.lineTo((this.width/2)+(30*time), this.height-25);
+        // arms
+        g.lineTo((this.width/2)-10+(30*time), (this.height-10));
+        g.moveTo((this.width/2)+(30*time), this.height-25);
+        g.lineTo((this.width/2)+10+(30*time), (this.height-10));
+        // head
+        g.moveTo((this.width/2)+(30*time), this.height-25);
+        g.lineTo((this.width/2)+5+(30*time), this.height-25);
+        g.lineTo((this.width/2)+5+(30*time), this.height-30);
+        g.lineTo((this.width/2)-5+(30*time), this.height-30);
+        g.lineTo((this.width/2)-5+(30*time), this.height-25);
+        g.lineTo((this.width/2)+(30*time), this.height-25);
+        g.stroke();
+
    }
 
    draw2DCanvases([ canvas1, canvas2 ]);
-</script>
+ </script>
 
 
