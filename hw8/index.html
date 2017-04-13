@@ -81,7 +81,7 @@ canvas1.update = function(g) {
       for( var col = 0; col < 3; col++ ) {
         if( row % col == 0 )
           P[row][col] = P[row][col] + 0.01;
-        if( Math.time(sin) > 0 )
+        if( Math.sin(time) > 0 )
           R[1][2] = -R[1][2];
       }
     }
