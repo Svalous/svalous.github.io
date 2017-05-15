@@ -1,7 +1,11 @@
+
+
+
 //To add elements to scene, need 2 functions:
 //* Object function: actual geometry and meshes --> eg: creates sphere
 //* Create function: create an instance of the object, sets initial position of object,  add to scene --> scene.add(sky.mesh);
 //See SKY functions for reference
+
 
 
 //COLORS
@@ -12,6 +16,8 @@ var Colors = {
     pink: 0xF5986E,
     sub: 0xFFDF68,
     blue: 0x68c3c0,
+    purple: 0x9c68a4,
+    lightblue: 0x89dbec
 };
 
 // THREEJS RELATED VARIABLES
@@ -99,8 +105,82 @@ function createLights() {
 
 ///OBJECTS
 
+var Starfish = function() {
+    this.mesh = new THREE.Object3D();
+    this.mesh.name = "starfish";
 
+    // Create leg 1
+    var geomSubFin = new THREE.BoxGeometry(10, 5, 1, 1, 1, 1);
+    var matCockpit = new THREE.MeshPhongMaterial({
+        color: Colors.purple,
+        // shading: THREE.FlatShading
+    });
+    var subFin = new THREE.Mesh(geomSubFin, matCockpit);
+    // subFin.castShadow = true;
+    // subFin.receiveShadow = true;
+    subFin.position.set(60, 35, 0);
+    this.mesh.add(subFin);
 
+    // Create body
+    var geomSubFin = new THREE.BoxGeometry(10, 10, 1, 1, 1, 1);
+    var matCockpit = new THREE.MeshPhongMaterial({
+        color: Colors.purple,
+        // shading: THREE.FlatShading
+    });
+    var subFin = new THREE.Mesh(geomSubFin, matCockpit);
+    // subFin.castShadow = true;
+    // subFin.receiveShadow = true;
+    subFin.position.set(70, 35, 0);
+    this.mesh.add(subFin);
+
+    // Create leg 2
+    var geomSubFin = new THREE.BoxGeometry(5, 10, 1, 1, 1, 1);
+    var matCockpit = new THREE.MeshPhongMaterial({
+        color: Colors.purple,
+        // shading: THREE.FlatShading
+    });
+    var subFin = new THREE.Mesh(geomSubFin, matCockpit);
+    // subFin.castShadow = true;
+    // subFin.receiveShadow = true;
+    subFin.position.set(70, 45, 0);
+    this.mesh.add(subFin);
+
+    // Create leg 3
+    var geomSubFin = new THREE.BoxGeometry(5, 14, 1, 1, 1, 1);
+    var matCockpit = new THREE.MeshPhongMaterial({
+        color: Colors.purple,
+        // shading: THREE.FlatShading
+    });
+    var subFin = new THREE.Mesh(geomSubFin, matCockpit);
+    // subFin.castShadow = true;
+    // subFin.receiveShadow = true;
+    subFin.position.set(65, 26, 0);
+    this.mesh.add(subFin);
+
+    // Create leg 4
+    var geomSubFin = new THREE.BoxGeometry(5, 14, 1, 1, 1, 1);
+    var matCockpit = new THREE.MeshPhongMaterial({
+        color: Colors.purple,
+        // shading: THREE.FlatShading
+    });
+    var subFin = new THREE.Mesh(geomSubFin, matCockpit);
+    // subFin.castShadow = true;
+    // subFin.receiveShadow = true;
+    subFin.position.set(75, 26, 0);
+    this.mesh.add(subFin);
+
+    // Create leg 5
+    var geomSubFin = new THREE.BoxGeometry(10, 5, 1, 1, 1, 1);
+    var matCockpit = new THREE.MeshPhongMaterial({
+        color: Colors.purple,
+        // shading: THREE.FlatShading
+    });
+    var subFin = new THREE.Mesh(geomSubFin, matCockpit);
+    // subFin.castShadow = true;
+    // subFin.receiveShadow = true;
+    subFin.position.set(80, 35, 0);
+    this.mesh.add(subFin);
+}
 
 var AirPlane = function() {
     this.mesh = new THREE.Object3D();
@@ -186,12 +266,18 @@ var Sky = function() {
     this.mesh = new THREE.Object3D();
     this.nSneks = 20;
     this.sneks = [];
+    this.starfish = [];
     var stepAngle = Math.PI * 2 / this.nSneks;
     for (var i = 0; i < this.nSneks; i++) {
         var c = new Snek();
+        var z = new Starfish();
+        this.starfish.push(z);
         this.sneks.push(c);
         var a = stepAngle * i;
         var h = 750 + Math.random() * 200;
+        z.mesh.position.y = Math.sin(a) * h;
+        z.mesh.position.x = Math.cos(a) * h;
+        z.mesh.position.z = -400 - Math.random() * 400;
         c.mesh.position.y = Math.sin(a) * h;
         c.mesh.position.x = Math.cos(a) * h;
         c.mesh.position.z = -400 - Math.random() * 400;
@@ -199,6 +285,8 @@ var Sky = function() {
         var s = 1 + Math.random() * 2;
         c.mesh.scale.set(s, s, s);
         this.mesh.add(c.mesh);
+        z.mesh.scale.set(s, s, s);
+        this.mesh.add(z.mesh);
     }
 };
 
@@ -240,7 +328,7 @@ var Cloud = function() {
     }
 };
 
-var Snek = function() {	
+var Snek = function() {
 	this.mesh = new THREE.Object3D();
     this.mesh.name = "snek";
     var geom = new THREE.CubeGeometry(15, 15, 15);
@@ -254,7 +342,7 @@ var Snek = function() {
         m.position.x = i * 15;
         m.position.y = 15;
         m.position.z = Math.sin(i) * 15;
-        
+
         var s = 1 - 0.1*i;
         m.scale.set(s, s, s);
         m.castShadow = true;
@@ -264,8 +352,64 @@ var Snek = function() {
 
 };
 
+// starfish
+
+var cuteBubbles = function(){
+  this.mesh = new THREE.Object3D();
+  this.mesh.name = "starfish";
+
+  // var geometry = new THREE.TorusKnotGeometry( 5, 4, 2, 16 );
+  // var material = new THREE.MeshBasicMaterial( {  color: Colors.purple } );
+  // var torusKnot = new THREE.Mesh( geometry, material );
+
+  var geometry = new THREE.SphereBufferGeometry( 1.5, 32, 32 );
+  var material = new THREE.MeshBasicMaterial( {color: Colors.lightblue} );
+
+  var bubbles = 100;
+  for (var i = 0; i < bubbles; i++) {
+      var bubble = new THREE.Mesh(geometry.clone(), material);
+      bubble.position.x = getRndInteger(-300,300);
+      bubble.position.y = getRndInteger(-300,300);
+      this.mesh.add(bubble);
+  }
+}
+
+
+
+var SeaCreature = function(){
+  this.mesh = new THREE.Object3D();
+    this.mesh.name ="seaCreature";
+    var geometry = new THREE.TorusKnotGeometry( 1, 4, 10, 10 );
+    var material = new THREE.MeshBasicMaterial( {  color: Colors.purple } );
+
+    var torusKnot = new THREE.Mesh( geometry, material );
+
+    for (var i = 0; i < 10; i++) {
+      var creature = new THREE.Mesh(geometry.clone(), material);
+      creature.position.x = getRndInteger(-300,300);
+      creature.position.y = getRndInteger(-300,300);
+      this.mesh.add(creature);
+  }
+
+
+}
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
 // 3D Models
 var airplane;
+var myBubbles;
+var creature;
+
+
+
+function createStarfish() {
+    var starfish = new Starfish();
+    starfish.mesh.scale.set(0.25, 0.25, 0.25);
+    starfish.mesh.position.y = 500;
+    scene.add(starfish.mesh);
+}
 
 function createPlane() {
     airplane = new AirPlane();
@@ -280,6 +424,25 @@ function createSky() {
     scene.add(sky.mesh);
 }
 
+// create starfish
+function createBubbles(){
+  myBubbles = new cuteBubbles();
+
+  myBubbles.mesh.position.x = 100;
+  myBubbles.mesh.position.y = -100;
+
+  scene.add(myBubbles.mesh);
+
+}
+
+function createCreature(){
+  creature = new SeaCreature();
+  creature.mesh.position.x = 100;
+  creature.mesh.position.y = -100;
+  scene.add(creature.mesh);
+
+}
+
 function loop() {
     updatePlane();
     // sky.mesh.rotate.x += 0.1;
@@ -288,6 +451,15 @@ function loop() {
     if (sky.mesh.position.x < -2250) {
         sky.mesh.position.x = 2000;
     }
+
+    // update starfish
+    myBubbles.mesh.translateY(.5);
+
+    if (myBubbles.mesh.position.y > 500) {
+        myBubbles.mesh.position.y = -300 ;
+    }
+
+    // ocutupus
     renderer.render(scene, camera);
     requestAnimationFrame(loop);
 }
@@ -315,6 +487,11 @@ function init(event) {
     createLights();
     createPlane();
     createSky();
+
+    createBubbles();
+
+    createCreature();
+
     loop();
 }
 
