@@ -1,1 +1,8 @@
+### Vim ###
 *.swp
+
+### Jekyll and Ruby ###
+_site
+.sass-cache
+.jekyll-metadata
+Gemfile.lock

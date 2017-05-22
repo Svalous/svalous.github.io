@@ -1,2 +1,2 @@
 # svalous.github.io
-Pages website...I put various things up here
+My pages website, where I blog about code and goof off!
