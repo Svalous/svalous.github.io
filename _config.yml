@@ -16,7 +16,7 @@
 title: "Nick's Blog"
 email: nick.m.ragusa@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Nick Ragusa is a computer science major, class of NYU 2018.  This is his blog, where he discusses nonsense in great detail, and attempts to market himself to no avail.
+  Nick Ragusa is a computer science major, class of NYU 2018.  This is his blog, where he discusses nonsense in great detail, and attempts to market himself as an endearingly awkward software engineer / artist.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  svalous
